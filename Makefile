@@ -1,4 +1,9 @@
-$(NAME):
-	dco version
+all:
 
-all: $(NAME)
+clean:
+
+re:
+
+fclean:
+
+.PHONY: all clean re fclean
