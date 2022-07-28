@@ -1,15 +1,15 @@
-FROM alpine:3.14
+FROM alpine:3.15
 
 RUN apk update
 RUN apk upgrade
 
-RUN apk nginx
-RUN apk openssl
+RUN apk add nginx
+RUN apk add openssl
 RUN mkdir -p /etc/ssl/private
 RUN mkdir -p /etc/ssl/certs
 RUN mkdir /var/www/html
-RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
-COPY ./conf/default.conf	/etc/nginx/http.d/default.conf
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt -subj "/C=FR/ST=PACA/L=NICE/O=42Nice/CN=tle.42.fr"
+COPY ./nginx.conf /etc/nginx/http.d/default.conf
 
 EXPOSE 443
 
