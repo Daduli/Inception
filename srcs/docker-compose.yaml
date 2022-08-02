@@ -1,5 +1,15 @@
 version: '3'
 
 services:
-  
+  nginx:
+    build: containers/nginx
+    image: nginx
+    container_name: nginx
+    ports:
+      - 443:443
+    networks:
+      - inception
+    volumes:
+      - /home/tle/datawordpress:/var/www/html
+    restart: unless-stopped
   
