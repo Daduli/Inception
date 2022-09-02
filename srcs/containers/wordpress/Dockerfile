@@ -10,6 +10,6 @@ EXPOSE 9000
 
 RUN adduser -D php-fpm-tle
 
-ENTRYPOINT ["sh", "installation.sh"]
+ENTRYPOINT ["sh", "install.sh"]
 
 CMD ["php-fpm7", "-F"]

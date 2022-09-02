@@ -30,8 +30,8 @@ define( 'DB_PASSWORD', getenv( 'MARIADB_PASSWORD' ) );
 /** MySQL hostname */
 define( 'DB_HOST', 'mariadb:3306' );
 
-define( 'WP_SITEURL', 'https://gscalisi.42Nice.fr');
-define( 'WP_HOME', 'https://gscalisi.42Nice.fr');
+define( 'WP_SITEURL', 'https://tle.42.fr');
+define( 'WP_HOME', 'https://tle.42.fr');
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );

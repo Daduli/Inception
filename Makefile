@@ -1,10 +1,10 @@
 all:
-	cd srcs && sudo dco up --build
+	cd srcs && docker-compose up --build
 clean:
-	cd srcs && sudo dco down --volumes
+	cd srcs && sudo docker-compose down --volumes
 fclean: clean
-	sudo rm -rf /home/tle.42.fr/data/mariadb/*
-	sudo rm -rf /home/tle.42.fr/data/wordpress/*
+	sudo rm -rf /home/tle/data/mariadb/*
+	sudo rm -rf /home/tle/data/wordpress/*
 re: fclean all
 
 .PHONY: all clean re fclean
