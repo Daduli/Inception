@@ -11,7 +11,7 @@ RUN chown -R mysql /var/lib/mysql
 
 COPY conf/my.cnf /etc/my.cnf.d/mly.cnf
 COPY conf/my.cnf /etc/mysql/my.cnf
-COPY conf/launch.sh launch.sh
+COPY tools/launch.sh launch.sh
 
 CMD ["sh", "launch.sh"]
 EXPOSE 3306
