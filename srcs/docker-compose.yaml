@@ -63,11 +63,11 @@ volumes:
     driver_opts:
       o: 'bind'
       type: 'none'
-      device: '/Users/gscalisi/inception/inception/volumes'
+      device: '/Users/tle/Document/Inception/volumes'
       
   v_wordpress:
     driver: local
     driver_opts:
       o: 'bind'
       type: 'none'
-      device: '/Users/gscalisi/inception/inception/volumes'
+      device: '/Users/tle/Document/Inception/volumes'
