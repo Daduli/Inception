@@ -2,71 +2,72 @@ version: '3'
 
 services:
   nginx:
-    build: containers/nginx
+    build: requirements/nginx/
     image: nginx
     container_name: nginx
     ports:
       - 443:443
     networks:
       - inception
+    restart: unless-stopped
     volumes:
       - /home/tle/data/wordpress:/var/www/html
-    restart: unless-stopped
   
-  mariadb:
-    build: containers/mariadb
-    image: mariadb
-    container_name: mariadb
-    networks:
-      - inception
-    volumes:
-      - /home/tle/data/mariadb:/var/lib/mysql
-    restart: on-failure
-    environment:
-      - MARIADB_DATABASE=${MARIADB_DATABASE}
-      - MARIADB_USER=${MARIADB_USER}
-      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
-      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
-    env_file:
-      - ".env"
-    
   wordpress:
-    build: containers/wordpress
+    build: requirements/Wordpress/
     image: wordpress
     container_name: wordpress
     networks:
       - inception
+    restart: on-failure
+    depends_on:
+      - mariadb
     volumes:
       - /home/tle/data/wordpress:/var/www/html
-    restart: on-failure
     environment:
       - DOMAIN_NAME=${DOMAIN_NAME}
-      - MARIADB_DATABASE=${MARIADB_DATABASE}
       - MARIADB_USER=${MARIADB_USER}
       - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+      - MARIADB_DATABASE=${MARIADB_DATABASE}
       - WORDPRESS_ADMIN=${WORDPRESS_ADMIN}
       - WORDPRESS_ADMIN_PASS=${WORDPRESS_ADMIN_PASS}
       - WORDPRESS_USER=${WORDPRESS_USER}
-      - WORPRESS_USER_PASS=${WORDPRESS_USER_PASS}
+      - WORDPRESS_USER_PASS=${WORDPRESS_USER_PASS}
     env_file:
-      - ".env"
-    depends_on:
-      - mariadb
+      - .env
 
+  mariadb:
+    build: requirements/Mariadb/
+    image: mariadb
+    container_name: mariadb
+    networks:
+      - inception
+    restart: on-failure
+    volumes:
+      - /home/tle/data/mariadb:/var/lib/mysql
+    environment:
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+      - MARIADB_DATABASE=${MARIADB_DATABASE}
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+    env_file:
+      - .env
 networks:
   inception:
+          #    name: inception
     driver: bridge
 
 volumes:
-  database:
+  v_mariadb:
     driver: local
     driver_opts:
       o: 'bind'
       type: 'none'
-      device: '/Users/tle/Document/Inception'
-  wordpress:
+      device: '/Users/gscalisi/inception/inception/volumes'
+      
+  v_wordpress:
     driver: local
     driver_opts:
       o: 'bind'
       type: 'none'
-      device: '/Users/tle/Document/Inception'
+      device: '/Users/gscalisi/inception/inception/volumes'
