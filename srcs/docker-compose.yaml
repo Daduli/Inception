@@ -2,7 +2,7 @@ version: '3'
 
 services:
   nginx:
-    build: requirements/nginx/
+    build: containers/nginx/
     image: nginx
     container_name: nginx
     ports:
@@ -14,7 +14,7 @@ services:
       - /home/tle/data/wordpress:/var/www/html
   
   wordpress:
-    build: requirements/Wordpress/
+    build: containers/Wordpress/
     image: wordpress
     container_name: wordpress
     networks:
@@ -37,7 +37,7 @@ services:
       - .env
 
   mariadb:
-    build: requirements/Mariadb/
+    build: containers/Mariadb/
     image: mariadb
     container_name: mariadb
     networks:
