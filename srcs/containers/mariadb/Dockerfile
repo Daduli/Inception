@@ -9,9 +9,9 @@ RUN rm -f /etc/my.cnf.d/my.cnf
 RUN mkdir -p /run/mysqld /var/lib/mysql
 RUN chown -R mysql /var/lib/mysql
 
-COPY config/my.cnf /etc/my.cnf.d/mly.cnf
-COPY config/my.cnf /etc/mysql/my.cnf
-COPY config/launch.sh launch.sh
+COPY conf/my.cnf /etc/my.cnf.d/mly.cnf
+COPY conf/my.cnf /etc/mysql/my.cnf
+COPY conf/launch.sh launch.sh
 
 CMD ["sh", "launch.sh"]
 EXPOSE 3306
