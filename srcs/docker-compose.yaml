@@ -47,7 +47,7 @@ services:
         - WORDPRESS_ADMIN=${WORDPRESS_ADMIN}
         - WORDPRESS_ADMIN_PASS=${WORDPRESS_ADMIN_PASS}
         - WORDPRESS_USER=${WORDPRESS_USER}
-        - WORPRESS_USER_PASS=${WORPRESS_USER_PASS}
+        - WORPRESS_USER_PASS=${WORDPRESS_USER_PASS}
       env_file:
         - ".env"
       depends_on:
