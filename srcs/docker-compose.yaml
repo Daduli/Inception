@@ -61,12 +61,12 @@ volumes:
   database:
     driver: local
     driver_opts:
-      o: bind
-      type: none
-      device: /Users/tle/Document/Inception
+      o: 'bind'
+      type: 'none'
+      device: '/Users/tle/Document/Inception'
   wordpress:
     driver: local
     driver_opts:
-      o: bind
-      type: none
-      device: /Users/tle/Document/Inception
+      o: 'bind'
+      type: 'none'
+      device: '/Users/tle/Document/Inception'
