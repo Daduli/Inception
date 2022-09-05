@@ -14,7 +14,7 @@ services:
       - /home/tle/data/wordpress:/var/www/html
   
   wordpress:
-    build: containers/Wordpress/
+    build: containers/wordpress/
     image: wordpress
     container_name: wordpress
     networks:
@@ -37,7 +37,7 @@ services:
       - .env
 
   mariadb:
-    build: containers/Mariadb/
+    build: containers/mariadb/
     image: mariadb
     container_name: mariadb
     networks:
