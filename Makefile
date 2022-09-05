@@ -1,5 +1,5 @@
 all:
-	cd srcs && docker-compose up --build
+	cd srcs && sudo docker-compose up --build
 clean:
 	cd srcs && sudo docker-compose down --volumes
 fclean: clean
