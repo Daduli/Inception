@@ -30,28 +30,28 @@ services:
     env_file:
       - ".env"
     
-    wordpress:
-      build: containers/wordpress
-      image: wordpress
-      container_name: wordpress
-      networks:
-        - inception
-      volumes:
-        - /home/tle/data/wordpress:/var/www/html
-      restart: on-failure
-      environment:
-        - DOMAIN_NAME=${DOMAIN_NAME}
-        - MARIADB_DATABASE=${MARIADB_DATABASE}
-        - MARIADB_USER=${MARIADB_USER}
-        - MARIADB_PASSWORD=${MARIADB_PASSWORD}
-        - WORDPRESS_ADMIN=${WORDPRESS_ADMIN}
-        - WORDPRESS_ADMIN_PASS=${WORDPRESS_ADMIN_PASS}
-        - WORDPRESS_USER=${WORDPRESS_USER}
-        - WORPRESS_USER_PASS=${WORDPRESS_USER_PASS}
-      env_file:
-        - ".env"
-      depends_on:
-        - mariadb
+  wordpress:
+    build: containers/wordpress
+    image: wordpress
+    container_name: wordpress
+    networks:
+      - inception
+    volumes:
+      - /home/tle/data/wordpress:/var/www/html
+    restart: on-failure
+    environment:
+      - DOMAIN_NAME=${DOMAIN_NAME}
+      - MARIADB_DATABASE=${MARIADB_DATABASE}
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+      - WORDPRESS_ADMIN=${WORDPRESS_ADMIN}
+      - WORDPRESS_ADMIN_PASS=${WORDPRESS_ADMIN_PASS}
+      - WORDPRESS_USER=${WORDPRESS_USER}
+      - WORPRESS_USER_PASS=${WORDPRESS_USER_PASS}
+    env_file:
+      - ".env"
+    depends_on:
+      - mariadb
 
 networks:
   inception:
