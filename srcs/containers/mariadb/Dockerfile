@@ -1,5 +1,5 @@
 
-FROM alpine:3.14
+FROM alpine:3.15
 
 RUN apk update
 RUN apk upgrade
