@@ -63,11 +63,11 @@ volumes:
     driver_opts:
       o: 'bind'
       type: 'none'
-      device: '/Users/tle/Document/Inception/volumes'
+      device: '/home/tle/data/mariadb'
       
   v_wordpress:
     driver: local
     driver_opts:
       o: 'bind'
       type: 'none'
-      device: '/Users/tle/Document/Inception/volumes'
+      device: '/home/tle/data/wordpress'
