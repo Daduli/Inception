@@ -2,7 +2,7 @@ version: '3'
 
 services:
   nginx:
-    build: containers/nginx/
+    build: containers/nginx
     image: nginx
     container_name: nginx
     ports:
@@ -12,32 +12,9 @@ services:
     restart: unless-stopped
     volumes:
       - /home/tle/data/wordpress:/var/www/html
-  
-  wordpress:
-    build: containers/wordpress/
-    image: wordpress
-    container_name: wordpress
-    networks:
-      - inception
-    restart: on-failure
-    depends_on:
-      - mariadb
-    volumes:
-      - /home/tle/data/wordpress:/var/www/html
-    environment:
-      - DOMAIN_NAME=${DOMAIN_NAME}
-      - MARIADB_USER=${MARIADB_USER}
-      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
-      - MARIADB_DATABASE=${MARIADB_DATABASE}
-      - WORDPRESS_ADMIN=${WORDPRESS_ADMIN}
-      - WORDPRESS_ADMIN_PASS=${WORDPRESS_ADMIN_PASS}
-      - WORDPRESS_USER=${WORDPRESS_USER}
-      - WORDPRESS_USER_PASS=${WORDPRESS_USER_PASS}
-    env_file:
-      - .env
 
   mariadb:
-    build: containers/mariadb/
+    build: containers/mariadb
     image: mariadb
     container_name: mariadb
     networks:
@@ -46,26 +23,49 @@ services:
     volumes:
       - /home/tle/data/mariadb:/var/lib/mysql
     environment:
+      - MARIADB_DATABASE=${MARIADB_DATABASE}
       - MARIADB_USER=${MARIADB_USER}
       - MARIADB_PASSWORD=${MARIADB_PASSWORD}
-      - MARIADB_DATABASE=${MARIADB_DATABASE}
       - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
     env_file:
       - .env
+
+  wordpress:
+    build: containers/wordpress
+    image: wordpress
+    container_name: wordpress
+    networks:
+      - inception
+    restart: on-failure
+    volumes:
+      - /home/tle/data/wordpress:/var/www/html
+    environment:
+      - DOMAIN_NAME=${DOMAIN_NAME}
+      - MARIADB_DATABASE=${MARIADB_DATABASE}
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+      - WORDPRESS_ADMIN=${WORDPRESS_ADMIN}
+      - WORDPRESS_ADMIN_PASS=${WORDPRESS_ADMIN_PASS}
+      - WORDPRESS_USER=${WORDPRESS_USER}
+      - WORDPRESS_USER_PASS=${WORDPRESS_USER_PASS}
+    env_file:
+      - .env
+    depends_on:
+      - mariadb
+
 networks:
   inception:
-          #    name: inception
     driver: bridge
 
 volumes:
-  v_mariadb:
+  mariadb:
     driver: local
     driver_opts:
       o: 'bind'
       type: 'none'
       device: '/home/tle/data/mariadb'
-      
-  v_wordpress:
+
+  wordpress:
     driver: local
     driver_opts:
       o: 'bind'
